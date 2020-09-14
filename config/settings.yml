@@ -1,0 +1,10 @@
+plugins:
+  redirect_after_activation_enabled:
+    default: false
+    client: false
+  redirect_after_activation_url:
+    default: ''
+    client: false
+  redirect_after_activation_message:
+    default: "Your new account is confirmed; you will be redirected to the home page."
+    client: false

@@ -1,0 +1,31 @@
+<div id='simple-container'>
+
+  <%if flash[:error]%>
+    <div class='alert alert-error'>
+      <%=flash[:error]%>
+    </div>
+  <%else%>
+    <h2><%= t 'activation.welcome_to', site_name: SiteSetting.title %></h2>
+    <br>
+
+    <% if @needs_approval %>
+      <p><%= t 'activation.approval_required' %></p>
+    <% else %>
+      <% if SiteSetting.redirect_after_activation_enabled && !SiteSetting.redirect_after_activation_url.empty? %>
+        <p><%= SiteSetting.redirect_after_activation_message %></p>
+        <p><a class="btn" href="<%= SiteSetting.redirect_after_activation_url %>"><%= t('activation.continue_button', site_name: SiteSetting.title) -%></a></p>
+        <%- content_for(:no_ember_head) do %>
+          <%= tag.meta id: 'data-auto-redirect', data: { path: SiteSetting.redirect_after_activation_url } %>
+        <%- end %>
+        <%= preload_script 'auto-redirect' %>
+      <% else %>
+        <p><%= t('activation.please_continue') %></p>
+        <p><a class="btn" href="<%= path "/" %>"><%= t('activation.continue_button', site_name: SiteSetting.title) -%></a></p>
+        <%- content_for(:no_ember_head) do %>
+          <%= tag.meta id: 'data-auto-redirect', data: { path: path('/') } %>
+        <%- end %>
+        <%= preload_script 'auto-redirect' %>
+      <% end %>
+    <% end %>
+  <%end%>
+</div>

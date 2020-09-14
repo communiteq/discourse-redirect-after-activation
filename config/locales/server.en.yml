@@ -1,0 +1,5 @@
+en:
+  site_settings:
+    redirect_after_activation_enabled: "Redirect users to an alternative URL after account activation."
+    redirect_after_activation_url: "The URL to redirect to."
+    redirect_after_activation_message: "The message shown when redirecting."
